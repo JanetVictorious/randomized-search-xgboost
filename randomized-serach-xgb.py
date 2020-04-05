@@ -289,12 +289,12 @@ params_cv = {
     'colsample_bytree': [0.3, 0.5, 0.8],                # subsample ratio of columns constructing each tree
     'learning_rate': np.arange(0.03, 0.10, step=0.02),  # step size shrinkage 
     'max_depth': np.arange(3, 6),                       # max depth of tree
-    'n_estimators': np.arange(200, 600, step=50),       # number of trees used
+    'n_estimators': np.arange(400, 600, step=50),       # number of trees used
     'subsample': [0.5, 0.8, 1.0],                       # subsample ratio of training instances
     'min_child_weight': [5, 8, 10, 15],                 # minimum sum of instance weight needed in a child
-    'alpha': [0, 1, 2, 3, 4, 6],                        # L2 regularization term
-    'gamma': [0, 1, 2, 3, 4, 6],                        # minimum loss reduction for further partition
-    'max_delta_step': [0, 1, 2, 3, 4]                   # maximum step each leaf output must be (good for imblanaced data)
+    'alpha': [2, 3, 4, 6],                              # L2 regularization term
+    'gamma': [2, 3, 4, 6],                              # minimum loss reduction for further partition
+    'max_delta_step': [1, 2, 3, 4]                   # maximum step each leaf output must be (good for imblanaced data)
 }
 
 # Model
@@ -337,4 +337,4 @@ validation_df['TARGET'] = xgb_cv_rs.best_estimator_.predict(X_validation)
 validation_df['PD'] = xgb_cv_rs.best_estimator_.predict_proba(X_validation)[:,1]
 
 # Print results
-print(validation_df['SKID', 'TARGET', 'PD'])
+print(validation_df[['SK_ID_CURR', 'TARGET', 'PD']].head(30))
